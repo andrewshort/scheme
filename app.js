@@ -73,10 +73,6 @@ var sess = {
   saveUninitialized: true
 };
 
-if (app.get('env') === 'production') {
-  sess.cookie.secure = true; // serve secure cookies, requires https
-}
-
 app.use(session(sess));
 
 app.use(passport.initialize());
