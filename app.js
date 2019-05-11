@@ -55,13 +55,18 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(cookieParser());
 
+var redisClient = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_HOST);
+redisClient.auth(process.env.REDIS_PW);
+redisClient.on('error', function(err) {
+  console.log('redis error: ' + err);
+});
+
 // config express-session
 var sess = {
-  secret: 'mySuperSessionSecret',
+  secret: 'mySuperS3ssionSe46072',
   store: new RedisStore(
-    { client: redis.createClient(), 
-      host: 'redis-18571.c9.us-east-1-2.ec2.cloud.redislabs.com',
-      port: 18571
+    { 
+      client: redisClient
     }),
   cookie: {},
   resave: false,
@@ -69,7 +74,7 @@ var sess = {
 };
 
 if (app.get('env') === 'production') {
-  sess.cookie.secure = true; // serve secure cookies, requires https
+  sess.cookie.secure = false; // serve secure cookies, requires https
 }
 
 app.use(session(sess));
