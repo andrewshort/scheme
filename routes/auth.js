@@ -21,6 +21,7 @@ router.get('/callback', function (req, res, next) {
     console.log('passport.authenticate')
     console.log(err);
     console.log(user);
+    console.log(info);
     if (err) { return next(err); }
     //if (!user) { return res.redirect('/login'); }
     req.logIn(user, function (err) {
