@@ -12,6 +12,8 @@ var userInViews = require('./lib/middleware/userinviews');
 var authRouter = require('./routes/auth');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var redis = require('redis');
+var RedisStore = require('connect-redis')(session);
 
 dotenv.load();
 
@@ -55,7 +57,12 @@ app.use(cookieParser());
 
 // config express-session
 var sess = {
-  secret: 'CHANGE THIS SECRET',
+  secret: 'mySuperSessionSecret',
+  store: new RedisStore(
+    { client: redis.createClient(), 
+      host: 'redis-18571.c9.us-east-1-2.ec2.cloud.redislabs.com',
+      port: 18571
+    }),
   cookie: {},
   resave: false,
   saveUninitialized: true
