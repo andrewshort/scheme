@@ -1,4 +1,5 @@
 var express = require('express');
+var expressHbs = require('express-handlebars');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -46,7 +47,8 @@ const app = express();
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'mustache');
+app.engine('hbs', expressHbs({extname:'hbs', defaultLayout:'main.hbs'}));
+app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(cookieParser());
