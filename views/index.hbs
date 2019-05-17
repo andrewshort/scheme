@@ -1,5 +1,30 @@
-{{locals.user.nickname}}
->>
-{{user.nickname}}
-<<
-<a href="/login">Log In</a>
+<style>
+    #myid { 
+ background: url(images/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  opacity: 50%;
+}
+
+</style>
+
+<div id="myid">
+    <div class="container">
+        <div class="jumbotron">
+  <h1 class="display-4">Welcome to Scheme</h1>
+  <p class="lead">Scheme is a simple app</p>
+  <hr class="my-4"><p class="lead">
+      {{#if user}}
+    <h4>You are logged in as {{user.nickname}}</h4>
+  {{else}}
+    <a class="btn btn-primary" href="/login">Login</a>
+  {{/if}}
+    
+  </p>
+</div>
+        
+    </div>
+</div>
