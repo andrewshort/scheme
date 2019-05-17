@@ -12,6 +12,7 @@ var userInViews = require('./lib/middleware/userinviews');
 var authRouter = require('./routes/auth');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var startRouter = require('./routes/start');
 var redis = require('redis');
 var RedisStore = require('connect-redis')(session);
 
@@ -96,6 +97,7 @@ app.use(userInViews());
 app.use('/', authRouter);
 app.use('/', indexRouter);
 app.use('/', usersRouter);
+app.use('/', startRouter);
 
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
