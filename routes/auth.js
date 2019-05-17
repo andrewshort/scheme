@@ -37,11 +37,12 @@ router.get('/callback', function (req, res, next) {
 router.get('/logout', (req, res) => {
   req.logout();
 
-  var returnTo = req.protocol + '://' + req.hostname;
   var port = req.connection.localPort;
-  if (port !== undefined && port === 3000) {
-    returnTo += ':' + port;
-  }
+  var returnTo = 'https://' + req.hostname;
+  if (port !== undefined && port === 3000 && req.hostname === 'localhost') {
+    returnTo = 'http://localhost:3000'
+  } 
+  
   var logoutURL = new URL(
     util.format('https://%s/logout', process.env.AUTH0_DOMAIN)
   );
