@@ -13,6 +13,7 @@ var authRouter = require('./routes/auth');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var startRouter = require('./routes/start');
+var objectRouter = require('./routes/object');
 var redis = require('redis');
 var RedisStore = require('connect-redis')(session);
 
@@ -98,6 +99,7 @@ app.use('/', authRouter);
 app.use('/', indexRouter);
 app.use('/', usersRouter);
 app.use('/', startRouter);
+app.use('/', objectRouter);
 
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
